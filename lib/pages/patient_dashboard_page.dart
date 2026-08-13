@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/movement_analysis_widget.dart';
 import '../widgets/session_metrics_widget.dart';
 import '../widgets/patient_evolution_widget.dart';
+import '../widgets/session_objectives_widget.dart';
 
 class PatientDashboardPage extends StatelessWidget {
   const PatientDashboardPage({super.key});
@@ -47,7 +48,7 @@ class PatientDashboardPage extends StatelessWidget {
               const PatientEvolutionWidget(),
               const SizedBox(height: 32),
 
-              const Center(child: Text('Objetivos da Sessão (Em breve)')),
+              const SessionObjectivesWidget(),
               const SizedBox(height: 32),
 
               const Center(child: Text('Notas do Terapeuta (Em breve)')),
