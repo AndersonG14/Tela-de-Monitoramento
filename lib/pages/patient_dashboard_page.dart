@@ -32,40 +32,44 @@ class PatientDashboardPage extends StatelessWidget {
 
       // Corpo da página com rolagem
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(),
-              const SizedBox(height: 32),
+        child: Column(
+          children: [
+            const MockStatusBarWidget(),
 
-              // Aqui chamaremos os próximos componentes um a um!
-              const MovementAnalysisWidget(precision: 85.0),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(),
+                    const SizedBox(height: 32),
 
-              const SizedBox(height: 32),
+                    const MovementAnalysisWidget(precision: 85.0),
+                    const SizedBox(height: 32),
 
-              const SessionMetricsWidget(),
-              const SizedBox(height: 32),
+                    const SessionMetricsWidget(),
+                    const SizedBox(height: 32),
 
-              const PatientEvolutionWidget(),
-              const SizedBox(height: 32),
+                    const PatientEvolutionWidget(),
+                    const SizedBox(height: 32),
 
-              const SessionObjectivesWidget(),
-              const SizedBox(height: 32),
+                    const SessionObjectivesWidget(),
+                    const SizedBox(height: 32),
 
-              const TherapistNotesWidget(),
-              const SizedBox(height: 32),
+                    const TherapistNotesWidget(),
+                    const SizedBox(height: 32),
 
-              const Center(child: Text('Notas do Terapeuta (Em breve)')),
-              const SizedBox(height: 32),
-
-              const Center(child: Text('Plano de Casa (Em breve)')),
-            ],
-          ),
+                    const HomePlanWidget(),
+                    const SizedBox(height: 32),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-    );
+    ); // <--- O ERRO ESTAVA AQUI! Faltava esse fechamento do Scaffold.
   }
 
   // 1. Componente do Cabeçalho
