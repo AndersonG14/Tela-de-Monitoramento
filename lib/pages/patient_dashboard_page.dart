@@ -3,6 +3,8 @@ import '../widgets/movement_analysis_widget.dart';
 import '../widgets/session_metrics_widget.dart';
 import '../widgets/patient_evolution_widget.dart';
 import '../widgets/session_objectives_widget.dart';
+import '../widgets/therapist_notes_widget.dart';
+import '../widgets/home_plan_widget.dart';
 
 class PatientDashboardPage extends StatelessWidget {
   const PatientDashboardPage({super.key});
@@ -49,6 +51,9 @@ class PatientDashboardPage extends StatelessWidget {
               const SizedBox(height: 32),
 
               const SessionObjectivesWidget(),
+              const SizedBox(height: 32),
+
+              const TherapistNotesWidget(),
               const SizedBox(height: 32),
 
               const Center(child: Text('Notas do Terapeuta (Em breve)')),
