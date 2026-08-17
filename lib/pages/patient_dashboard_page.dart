@@ -5,6 +5,7 @@ import '../widgets/patient_evolution_widget.dart';
 import '../widgets/session_objectives_widget.dart';
 import '../widgets/therapist_notes_widget.dart';
 import '../widgets/home_plan_widget.dart';
+import '../widgets/mock_status_bar_widget.dart';
 
 class PatientDashboardPage extends StatelessWidget {
   const PatientDashboardPage({super.key});
