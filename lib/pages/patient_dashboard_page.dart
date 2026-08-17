@@ -16,20 +16,6 @@ class PatientDashboardPage extends StatelessWidget {
       // Fundo cinza bem clarinho (típico de apps de saúde/clean)
       backgroundColor: const Color(0xFFF5F7FA),
 
-      // Barra de navegação inferior
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'Sessões'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Progresso'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Perfil'),
-        ],
-      ),
-
       // Corpo da página com rolagem
       body: SafeArea(
         child: Column(
