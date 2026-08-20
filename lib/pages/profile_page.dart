@@ -406,7 +406,14 @@ class ProfilePage extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
-                child: modalChild,
+                child: Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.down,
+                    onDismissed: (direction) {
+                      Navigator.pop(context);
+                    },
+                  child: modalChild,
+                ),
             ),
           ),
         ],
