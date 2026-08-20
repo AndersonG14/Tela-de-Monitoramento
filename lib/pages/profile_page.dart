@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../widgets/mock_status_bar_widget.dart';
 import '../widgets/edit_profile_modal.dart';
@@ -68,7 +69,9 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  // ==========================================
   // COMPONENTES DA TELA
+  // ==========================================
 
   Widget _buildSectionTitle(String title) {
     return Text(
@@ -104,29 +107,22 @@ class ProfilePage extends StatelessWidget {
             Text('Perfil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87)),
           ],
         ),
-
-    GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          builder: (context) => const EditProfileModal(),
-          );
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
-          child: const Row(
-            children: [
-              Icon(Icons.edit, color: Colors.blueAccent, size: 16),
-              SizedBox(width: 6),
-              Text('Editar perfil', style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 13)),
-            ],
+        GestureDetector(
+          // CHAMA NOSSA NOVA FUNÇÃO COM DESFOQUE AQUI!
+          onTap: () => _showBlurredModal(context, const EditProfileModal()),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+            child: const Row(
+              children: [
+                Icon(Icons.edit, color: Colors.blueAccent, size: 16),
+                SizedBox(width: 6),
+                Text('Editar perfil', style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 13)),
+              ],
+            ),
           ),
         ),
-      ),
-    ],
+      ],
     );
   }
 
@@ -198,7 +194,7 @@ class ProfilePage extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(child: _buildSmallStatCard('87%', 'Taxa média de\nacerto', Colors.green)),
         const SizedBox(width: 12),
-        Expanded(child: _buildSmallStatCard('+15%', 'Evolução total\n ', Colors.orange)), // Espaço extra para alinhar
+        Expanded(child: _buildSmallStatCard('+15%', 'Evolução total\n ', Colors.orange)),
       ],
     );
   }
@@ -306,7 +302,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildSupportCard(context) {
+  Widget _buildSupportCard(BuildContext context) {
     return _buildCard(
       child: Column(
         children: [
@@ -317,31 +313,25 @@ class ProfilePage extends StatelessWidget {
           _buildActionRow(Icons.privacy_tip_outlined, 'Política de privacidade'),
           const Divider(height: 30, color: Color(0xFFEEEEEE)),
 
-      GestureDetector(
-        onTap: () {
-          showModalBottomSheet(
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (context) => const LogoutModal(),
-          );
-        },
-        behavior: HitTestBehavior.opaque,
-
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Colors.red.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-                child: const Icon(Icons.logout, color: Colors.redAccent, size: 20),
-              ),
-              const SizedBox(width: 16),
-              const Expanded(child: Text('Sair da conta', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.redAccent))),
-              const Icon(Icons.chevron_right, color: Colors.redAccent),
-            ],
+          GestureDetector(
+            // CHAMA NOSSA NOVA FUNÇÃO COM DESFOQUE AQUI TAMBÉM!
+            onTap: () => _showBlurredModal(context, const LogoutModal()),
+            behavior: HitTestBehavior.opaque,
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(color: Colors.red.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+                  child: const Icon(Icons.logout, color: Colors.redAccent, size: 20),
+                ),
+                const SizedBox(width: 16),
+                const Expanded(child: Text('Sair da conta', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.redAccent))),
+                const Icon(Icons.chevron_right, color: Colors.redAccent),
+              ],
+            ),
           )
+        ],
       ),
-      ],
-    ),
     );
   }
 
@@ -391,6 +381,39 @@ class ProfilePage extends StatelessWidget {
         ),
         Icon(Icons.chevron_right, color: Colors.grey.shade400),
       ],
+    );
+  }
+
+  // ==========================================
+  // FUNÇÃO MÁGICA DO DESFOQUE
+  // ==========================================
+  void _showBlurredModal(BuildContext context, Widget modalChild) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Permite que a Stack ocupe a tela toda
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.transparent, // Removemos a cor sólida padrão
+      builder: (context) => Stack(
+        children: [
+          // 1. O fundo desfocado e levemente escurecido
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context), // Fecha ao tocar fora
+                child: Container(
+                  color: Colors.black.withOpacity(0.2), // Tom escuro suave
+                ),
+              ),
+            ),
+          ),
+          // 2. O seu Modal original alinhado lá embaixo
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: modalChild,
+          ),
+        ],
+      ),
     );
   }
 }
