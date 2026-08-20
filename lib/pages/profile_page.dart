@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/mock_status_bar_widget.dart';
+import '../widgets/edit_profile_modal.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -18,7 +19,7 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildHeader(),
+                    _buildHeader(context),
                     const SizedBox(height: 24),
 
                     _buildMainProfileCard(),
@@ -90,7 +91,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -102,7 +103,17 @@ class ProfilePage extends StatelessWidget {
             Text('Perfil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87)),
           ],
         ),
-        Container(
+
+    GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (context) => const EditProfileModal(),
+          );
+        },
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
           child: const Row(
@@ -113,7 +124,8 @@ class ProfilePage extends StatelessWidget {
             ],
           ),
         ),
-      ],
+      ),
+    ],
     );
   }
 
