@@ -69,9 +69,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // ==========================================
   // COMPONENTES DA TELA
-  // ==========================================
 
   Widget _buildSectionTitle(String title) {
     return Text(
@@ -108,7 +106,6 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
         GestureDetector(
-          // CHAMA NOSSA NOVA FUNÇÃO COM DESFOQUE AQUI!
           onTap: () => _showBlurredModal(context, const EditProfileModal()),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -314,7 +311,6 @@ class ProfilePage extends StatelessWidget {
           const Divider(height: 30, color: Color(0xFFEEEEEE)),
 
           GestureDetector(
-            // CHAMA NOSSA NOVA FUNÇÃO COM DESFOQUE AQUI TAMBÉM!
             onTap: () => _showBlurredModal(context, const LogoutModal()),
             behavior: HitTestBehavior.opaque,
             child: Row(
@@ -384,9 +380,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // ==========================================
-  // FUNÇÃO MÁGICA DO DESFOQUE
-  // ==========================================
+  // Função do Desfoque (BackdropFilter)
   void _showBlurredModal(BuildContext context, Widget modalChild) {
     showModalBottomSheet(
       context: context,
