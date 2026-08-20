@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/mock_status_bar_widget.dart';
 import '../widgets/edit_profile_modal.dart';
+import '../widgets/logout_modal.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
