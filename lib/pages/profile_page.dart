@@ -48,7 +48,7 @@ class ProfilePage extends StatelessWidget {
 
                     _buildSectionTitle('CONTA E SUPORTE'),
                     const SizedBox(height: 12),
-                    _buildSupportCard(),
+                    _buildSupportCard(context),
                     const SizedBox(height: 32),
 
                     const Center(
@@ -306,7 +306,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildSupportCard() {
+  Widget _buildSupportCard(context) {
     return _buildCard(
       child: Column(
         children: [
@@ -316,7 +316,18 @@ class ProfilePage extends StatelessWidget {
           const Divider(height: 30, color: Color(0xFFEEEEEE)),
           _buildActionRow(Icons.privacy_tip_outlined, 'Política de privacidade'),
           const Divider(height: 30, color: Color(0xFFEEEEEE)),
-          Row(
+
+      GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (context) => const LogoutModal(),
+          );
+        },
+        behavior: HitTestBehavior.opaque,
+
+          child: Row(
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
@@ -328,8 +339,9 @@ class ProfilePage extends StatelessWidget {
               const Icon(Icons.chevron_right, color: Colors.redAccent),
             ],
           )
-        ],
       ),
+      ],
+    ),
     );
   }
 
