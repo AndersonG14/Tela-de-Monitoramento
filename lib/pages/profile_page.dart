@@ -66,9 +66,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // ==========================================
   // COMPONENTES DA TELA
-  // ==========================================
 
   Widget _buildSectionTitle(String title) {
     return Text(
