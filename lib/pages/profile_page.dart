@@ -384,9 +384,9 @@ class ProfilePage extends StatelessWidget {
   void _showBlurredModal(BuildContext context, Widget modalChild) {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // Permite que a Stack ocupe a tela toda
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      barrierColor: Colors.transparent, // Removemos a cor sólida padrão
+      barrierColor: Colors.transparent,
       builder: (context) => Stack(
         children: [
           // 1. O fundo desfocado e levemente escurecido
@@ -394,9 +394,9 @@ class ProfilePage extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
               child: GestureDetector(
-                onTap: () => Navigator.pop(context), // Fecha ao tocar fora
+                onTap: () => Navigator.pop(context),
                 child: Container(
-                  color: Colors.black.withOpacity(0.2), // Tom escuro suave
+                  color: Colors.black.withOpacity(0.2),
                 ),
               ),
             ),
@@ -404,7 +404,10 @@ class ProfilePage extends StatelessWidget {
           // 2. O seu Modal original alinhado lá embaixo
           Align(
             alignment: Alignment.bottomCenter,
-            child: modalChild,
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: modalChild,
+            ),
           ),
         ],
       ),
