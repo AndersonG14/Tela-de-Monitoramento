@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'patient_dashboard_page.dart';
+import 'profile_page.dart';
+
 
 class MainNavigationPage extends StatefulWidget {
   const MainNavigationPage({super.key});
@@ -9,15 +11,14 @@ class MainNavigationPage extends StatefulWidget {
 }
 
 class _MainNavigationPageState extends State<MainNavigationPage> {
-  // Variável que guarda qual aba está selecionada (0 = Início, 1 = Sessões, etc)
   int _currentIndex = 0;
 
   // Lista de telas que serão exibidas
   final List<Widget> _pages = [
-    const PatientDashboardPage(), // 0: Nossa tela completa
-    const _DummyPage(title: 'Página de Sessões'), // 1
-    const _DummyPage(title: 'Página de Progresso'), // 2 (Igual a sua foto!)
-    const _DummyPage(title: 'Página de Perfil'), // 3
+    const PatientDashboardPage(),
+    const _DummyPage(title: 'Página de Sessões'),
+    const _DummyPage(title: 'Página de Progresso'),
+    const ProfilePage(),
   ];
 
   @override
